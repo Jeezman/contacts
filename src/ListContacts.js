@@ -22,28 +22,32 @@ class ListContacts extends Component {
     }
 
     render () {
+
+        const { contacts, onDeleteContact } = this.props;
+        const { query } = this.state;
+
         //will be the contact which match a specific pattern
         let showingContacts;
 
-        if (this.state.query){
+        if (query){
             //escapeRegExp escapes any special xters in query
-            const match = new RegExp(escapeRegExp(this.state.query), 'i');
+            const match = new RegExp(escapeRegExp(query), 'i');
             //filters for where the contact name matches our specific regular expression
-            showingContacts = this.props.contacts.filter((contact) => match.test(contact.name))
+            showingContacts = contacts.filter((contact) => match.test(contact.name))
         } else {
-            showingContacts = this.props.contacts
+            showingContacts = contacts
         }
 
         showingContacts.sort(sortBy('name'));
 
         return (
             <div className='list-contacts' >
-                {JSON.stringify(this.state.query)}
+                {JSON.stringify(query)}
                 <div className="list-contacts-top">
                     <input className="search-contacts" 
                            type="text" 
                            placeholder="Search Contacts"
-                           value={this.state.query}
+                           value={query}
                            onChange={(event) => this.UpdateQuery(event.target.value)}
                     />
                 </div>
@@ -59,7 +63,7 @@ class ListContacts extends Component {
                                 <p>{contact.email}</p>
                             </div>
                             <button 
-                                onClick={() => this.props.onDeleteContact(contact)}
+                                onClick={() => onDeleteContact(contact)}
                                 className="contact-remove">
                                 Remove
                             </button>
