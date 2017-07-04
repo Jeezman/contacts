@@ -15,6 +15,12 @@ class ListContacts extends Component {
         query: ''
     }
 
+    clearQuery = () => {
+        this.setState({
+            query: ''
+        })
+    }
+
     UpdateQuery = (query) => {
         this.setState({
             query: query.trim()
@@ -42,7 +48,7 @@ class ListContacts extends Component {
 
         return (
             <div className='list-contacts' >
-                {JSON.stringify(query)}
+                {/*{JSON.stringify(query)}*/}
                 <div className="list-contacts-top">
                     <input className="search-contacts" 
                            type="text" 
@@ -51,6 +57,13 @@ class ListContacts extends Component {
                            onChange={(event) => this.UpdateQuery(event.target.value)}
                     />
                 </div>
+
+                { showingContacts.length !== contacts.length && (
+                    <div className="showing-contacts" >
+                        <span>Now showing {showingContacts.length} of {contacts.length} </span>
+                        <button onClick={this.clearQuery} >Show All</button>
+                    </div>
+                )}
 
                 <ol className="contact-list">
                     {showingContacts.map((contact) =>
