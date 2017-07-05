@@ -56,6 +56,11 @@ class ListContacts extends Component {
                            value={query}
                            onChange={(event) => this.UpdateQuery(event.target.value)}
                     />
+                    <a 
+                      href="#create"
+                      onClick={this.props.onNavigate}
+                      className="add-contact"
+                    >Add Contact</a>
                 </div>
 
                 { showingContacts.length !== contacts.length && (
