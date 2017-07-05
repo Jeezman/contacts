@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import ListContacts from './ListContacts';
 import * as ContactsAPI from './utils/ContactsAPI';
+import CreateContact from './CreateContact';
 import './acc.css';
 
 
@@ -9,9 +10,8 @@ import './acc.css';
 class App extends Component {
 
   state = {
-
+    screen: 'list', //list, create
     contacts: []
-
   }
 
   componentDidMount() {
@@ -36,10 +36,15 @@ class App extends Component {
   render() {
     return (
       <div>
-        <ListContacts 
-          contacts={this.state.contacts} 
-          onDeleteContact={this.removeContact}
-        />
+        {this.state.screen === 'list' && (
+          <ListContacts 
+            contacts={this.state.contacts} 
+            onDeleteContact={this.removeContact}
+          />
+        )}
+        {this.state.screen === 'create' && (
+          <CreateContact />
+        )}
       </div>
     )
   }
