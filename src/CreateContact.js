@@ -21,7 +21,7 @@ class CreateContact extends Component {
                 <form onSubmit={this.handleSubmit} className="create-contact-form" >
                     <ImageInput
                       className="create-contact-avatar-input"
-                      name="avatarUrl"
+                      name="avatarURL"
                       maxHeight={64}
                     ></ImageInput>
                     <div className="create-contact-details">
